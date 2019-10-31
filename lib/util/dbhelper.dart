@@ -47,4 +47,32 @@ class DbHelper {
     var result = await db.insert(tblTodo, todo.toMap());
     return result;
   }
+
+  Future<List> getTodos() async {
+    Database db = await this.db;
+    String sql = "SELECT * FROM $tblTodo order by $colPriority ASC";
+    var result = await db.rawQuery(sql);
+    return result;
+  }
+
+  Future<int> getCount() async {
+    Database db = await this.db;
+    String sql = "SELECT COUNT * FROM $tblTodo";
+    var result = Sqflite.firstIntValue(await db.rawQuery(sql));
+    return result;
+  }
+
+  Future<int> updateTodo(Todo todo) async {
+    Database db = await this.db;
+    var result = await db.update(tblTodo, todo.toMap(),
+        where: "$colId = ?", whereArgs: [todo.id]);
+    return result;
+  }
+
+  Future<int> deleteTodo(int id) async {
+    Database db = await this.db;
+    String sql = "DELETE FROM $tblTodo WHERE $colId = $id";
+    var result = await db.rawDelete(sql);
+    return result;
+  }
 }
