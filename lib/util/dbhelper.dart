@@ -37,8 +37,8 @@ class DbHelper {
 
   void _createDb(Database db, int newVersion) async {
     String sql =
-        "CREATE TABLE $tblTodo($colId INTEGER PRIMARY KEY, $colTitle TEXT,)" +
-            "$colDescription TEXT, $colPriority INTEGER, $colDate TEXT";
+        "CREATE TABLE $tblTodo($colId INTEGER PRIMARY KEY, $colTitle TEXT, " +
+            "$colDescription TEXT, $colPriority INTEGER, $colDate TEXT)";
     await db.execute(sql);
   }
 

@@ -26,32 +26,29 @@ class _TodoListState extends State<TodoList> {
         tooltip: "Add new todo",
         child: new Icon(Icons.add),
       ),
-
     );
   }
+
   ListView todoListItems() {
     return ListView.builder(
       itemCount: count,
-      itemBuilder: (BuildContext context, int position){
+      itemBuilder: (BuildContext context, int position) {
         return Card(
           color: Colors.white,
           elevation: 2.0,
           child: ListTile(
             leading: CircleAvatar(
               backgroundColor: Colors.red,
-              child: Text(
-                this.todos[position].id.toString()
-              ),
+              child: Text(this.todos[position].id.toString()),
             ),
             title: Text(this.todos[position].title),
             subtitle: Text(this.todos[position].date),
-            onTap: (){
+            onTap: () {
               debugPrint("Tapped on " + this.todos[position].id.toString());
             },
           ),
         );
       },
-      itemExtent: ,
     );
   }
 
@@ -62,9 +59,7 @@ class _TodoListState extends State<TodoList> {
       todosFutue.then((result) {
         List<Todo> todoList = List<Todo>();
         count = result.length;
-        result.forEach((f) => {
-          todoList.add(Todo.fromObject(f))
-        });
+        result.forEach((f) => {todoList.add(Todo.fromObject(f))});
         setState(() {
           todos = todoList;
           count = count;
